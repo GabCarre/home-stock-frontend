@@ -18,7 +18,7 @@ export class Produits implements OnInit {
   categories: Categorie[] = [];
   nouveauProduit: Produit = { nom: '' };
   sousOnglet: 'ajouter' | 'liste' = 'liste';
-   messageConfirmation = '';
+  messageConfirmation = '';
 
   constructor(private stockService: StockService, private cdr: ChangeDetectorRef) {}
 

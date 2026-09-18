@@ -18,6 +18,8 @@ export class Lots implements OnInit {
   lots: Lot[] = [];
   produits: Produit[] = [];
   emplacements: Emplacement[] = [];
+  sousOnglet: 'ajouter' | 'liste' = 'liste';
+  messageConfirmation = '';
 
   produitSelectionneId?: number;
   emplacementSelectionneId?: number;
@@ -73,6 +75,9 @@ export class Lots implements OnInit {
       this.quantite = undefined;
       this.chargerLots();
     });
+
+    this.messageConfirmation = `"Le lot a bien été ajouté.`;
+      setTimeout(() => (this.messageConfirmation = ''), 4000);
   }
 
   supprimerLot(id: number): void {
