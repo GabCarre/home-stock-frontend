@@ -53,28 +53,28 @@
 <div *ngIf="sousOnglet === 'liste'">
   <h2>Liste des produits</h2>
   <table>
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Code-barre</th>
-        <th>Catégorie</th>
-        <th>Unité</th>
-        <th>Stock total</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let p of produits">
-        <td>{{ p.nom }}</td>
-        <td>{{ p.codeBarre ?? '—' }}</td>
-        <td>{{ p.categorie?.nom ?? '—' }}</td>
-        <td>{{ p.unite ?? '—' }}</td>
-        <td>{{ quantiteTotale(p) }}</td>
-        <td><button (click)="supprimerProduit(p.id!)">Supprimer</button></td>
-      </tr>
-      <tr *ngIf="produits.length === 0">
-        <td colspan="6">Aucun produit pour l'instant.</td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Code-barre</th>
+      <th>Catégorie</th>
+      <th>Unité</th>
+      <th>Stock total</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of produits">
+      <td data-label="Nom">{{ p.nom }}</td>
+      <td data-label="Code-barre">{{ p.codeBarre ?? '—' }}</td>
+      <td data-label="Catégorie">{{ p.categorie?.nom ?? '—' }}</td>
+      <td data-label="Unité">{{ p.unite ?? '—' }}</td>
+      <td data-label="Stock total">{{ quantiteTotale(p) }}</td>
+      <td data-label="Actions"><button (click)="supprimerProduit(p.id!)">Supprimer</button></td>
+    </tr>
+    <tr *ngIf="produits.length === 0">
+      <td colspan="6">Aucun produit pour l'instant.</td>
+    </tr>
+  </tbody>
+</table>
 </div>
