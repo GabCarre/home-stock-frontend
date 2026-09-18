@@ -1,0 +1,80 @@
+<div class="sous-onglets">
+  <button
+    [class.active]="sousOnglet === 'liste'"
+    (click)="sousOnglet = 'liste'">
+    Liste des produits
+  </button>
+  <button
+    [class.active]="sousOnglet === 'ajouter'"
+    (click)="sousOnglet = 'ajouter'">
+    Ajouter un produit
+  </button>
+</div>
+
+<div class="message-confirmation" *ngIf="messageConfirmation">
+  ✓ {{ messageConfirmation }}
+</div>
+
+<div *ngIf="sousOnglet === 'ajouter'">
+  <h2>Ajouter un produit</h2>
+  <form (ngSubmit)="ajouterProduit()">
+    <label>
+      Nom *
+      <input type="text" name="nom" [(ngModel)]="nouveauProduit.nom" required>
+    </label>
+
+    <label>
+      Code-barre
+      <input type="text" name="codeBarre" [(ngModel)]="nouveauProduit.codeBarre">
+    </label>
+
+    <label>
+      Catégorie
+      <select name="categorie" [(ngModel)]="nouveauProduit.categorie">
+        <option [ngValue]="undefined">— aucune —</option>
+        <option *ngFor="let c of categories" [ngValue]="c">{{ c.nom }}</option>
+      </select>
+    </label>
+
+    <label>
+      Unité
+      <input type="text" name="unite" [(ngModel)]="nouveauProduit.unite" placeholder="kg, pack, boite...">
+    </label>
+
+    <label>
+      Seuil d'alerte
+      <input type="number" step="0.01" name="seuilAlerte" [(ngModel)]="nouveauProduit.seuilAlerte">
+    </label>
+
+    <button type="submit">Ajouter</button>
+  </form>
+</div>
+
+<div *ngIf="sousOnglet === 'liste'">
+  <h2>Liste des produits</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Code-barre</th>
+        <th>Catégorie</th>
+        <th>Unité</th>
+        <th>Stock total</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of produits">
+        <td>{{ p.nom }}</td>
+        <td>{{ p.codeBarre ?? '—' }}</td>
+        <td>{{ p.categorie?.nom ?? '—' }}</td>
+        <td>{{ p.unite ?? '—' }}</td>
+        <td>{{ quantiteTotale(p) }}</td>
+        <td><button (click)="supprimerProduit(p.id!)">Supprimer</button></td>
+      </tr>
+      <tr *ngIf="produits.length === 0">
+        <td colspan="6">Aucun produit pour l'instant.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

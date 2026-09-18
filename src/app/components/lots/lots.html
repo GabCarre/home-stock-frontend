@@ -1,0 +1,54 @@
+<h2>Ajouter un lot</h2>
+<form (ngSubmit)="ajouterLot()">
+  <label>
+    Produit *
+    <select name="produit" [(ngModel)]="produitSelectionneId" required>
+      <option *ngFor="let p of produits" [ngValue]="p.id">{{ p.nom }}</option>
+    </select>
+  </label>
+
+  <label>
+    Emplacement
+    <select name="emplacement" [(ngModel)]="emplacementSelectionneId">
+      <option [ngValue]="undefined">— aucun —</option>
+      <option *ngFor="let e of emplacements" [ngValue]="e.id">{{ e.nom }}</option>
+    </select>
+  </label>
+
+  <label>
+    Date de péremption
+    <input type="date" name="datePeremption" [(ngModel)]="datePeremption">
+  </label>
+
+  <label>
+    Quantité *
+    <input type="number" step="0.01" name="quantite" [(ngModel)]="quantite" required>
+  </label>
+
+  <button type="submit">Ajouter</button>
+</form>
+
+<h2>Liste des lots</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Produit</th>
+      <th>Emplacement</th>
+      <th>Date de péremption</th>
+      <th>Quantité</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let lot of lots">
+      <td>{{ lot.produit?.nom ?? '—' }}</td>
+      <td>{{ lot.emplacement?.nom ?? '—' }}</td>
+      <td>{{ lot.datePeremption ?? '—' }}</td>
+      <td>{{ lot.quantite }}</td>
+      <td><button (click)="supprimerLot(lot.id!)">Supprimer</button></td>
+    </tr>
+    <tr *ngIf="lots.length === 0">
+      <td colspan="5">Aucun lot pour l'instant.</td>
+    </tr>
+  </tbody>
+</table>

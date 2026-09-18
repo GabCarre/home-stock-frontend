@@ -1,0 +1,43 @@
+header {
+  background: var(--bleu);
+  color: var(--blanc);
+  padding: 1.2rem 2rem 0;
+  border-bottom: 4px solid var(--rouge);
+}
+
+header h1 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+}
+
+nav {
+  display: flex;
+  gap: 0.3rem;
+}
+
+nav a {
+  color: var(--blanc);
+  text-decoration: none;
+  padding: 0.6rem 1.3rem;
+  border-radius: 6px 6px 0 0;
+  font-weight: 600;
+  opacity: 0.75;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+nav a:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+nav a.active {
+  background: var(--blanc);
+  color: var(--bleu);
+  opacity: 1;
+}
+
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
